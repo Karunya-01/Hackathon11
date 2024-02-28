@@ -1,0 +1,259 @@
+package endtoend;
+
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterClass;
+
+import testclass.BookShelvesCheck;
+import testclass.GiftcardsCheck;
+import testclass.DropdownCheck;
+import testbase.BaseClass;
+
+public class EndToEndTest extends BaseClass {
+
+    BookShelvesCheck bookShelvesTest;
+    GiftcardsCheck giftCardsTest;
+    DropdownCheck dropdownTest;
+
+    @BeforeClass
+    public void setUp() {
+        // Initialization
+        initializeDriver();
+        bookShelvesTest = new BookShelvesCheck();
+        giftCardsTest = new GiftcardsCheck();
+        dropdownTest = new DropdownCheck();
+    }
+
+    @Test(priority = 1)
+    public void bookShelvesTest() throws InterruptedException {
+        // Book Shelves Tests
+        bookShelvesTest.verifyBookShelves();
+        bookShelvesTest.popupClose();
+        bookShelvesTest.setPriceFilter();
+        bookShelvesTest.sortByPriceHighToLow();
+        bookShelvesTest.chooseCategory();
+        bookShelvesTest.outOfStockCheckbox();
+        bookShelvesTest.getBookDetails();
+        bookShelvesTest.writeExcel();
+    }
+
+    @Test(priority = 2)
+    public void dropdownTest() throws InterruptedException {
+        // Dropdown Test
+        dropdownTest.GetDetails();
+    }
+
+    @Test(priority = 3)
+    public void giftCardsTest() throws InterruptedException {
+        // Gift Cards Tests
+        giftCardsTest.GetGiftCards();
+        giftCardsTest.Customizing();
+        giftCardsTest.invalidDetailsFilling();
+        giftCardsTest.captureAndDisplayErrorMessage();
+        giftCardsTest.validateDetails();
+        giftCardsTest.validateAllDetails();
+        giftCardsTest.writeDetailsToJson();
+    }
+
+    @AfterClass
+    public void tearDown() {
+        // Clean-up
+        quitDriver();
+    }
+}
+*************************************************************************************************************************
+using smoke and regression
+*************************************************************************************************************************
+package endtoend;
+
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterClass;
+
+import testclass.BookShelvesCheck;
+import testclass.GiftcardsCheck;
+import testclass.DropdownCheck;
+import testbase.BaseClass;
+
+public class EndToEndTest extends BaseClass {
+
+    BookShelvesCheck bookShelvesTest;
+    GiftcardsCheck giftCardsTest;
+    DropdownCheck dropdownTest;
+
+    @BeforeClass
+    public void setUp() {
+        // Initialization
+        initializeDriver();
+        bookShelvesTest = new BookShelvesCheck();
+        giftCardsTest = new GiftcardsCheck();
+        dropdownTest = new DropdownCheck();
+    }
+
+    @Test(priority = 1, groups = { "smoke" })
+    public void endToEndSmokeTest() throws InterruptedException {
+        // Book Shelves Smoke Tests
+        bookShelvesTest.verifyBookShelves();
+        bookShelvesTest.popupClose();
+        bookShelvesTest.setPriceFilter();
+        bookShelvesTest.sortByPriceHighToLow();
+        bookShelvesTest.chooseCategory();
+        bookShelvesTest.outOfStockCheckbox();
+        bookShelvesTest.getBookDetails();
+        bookShelvesTest.writeExcel();
+
+        // Dropdown Smoke Test
+        dropdownTest.GetDetails();
+
+        // Gift Cards Smoke Tests
+        giftCardsTest.GetGiftCards();
+        giftCardsTest.Customizing();
+    }
+
+    @Test(priority = 2, groups = { "regression" })
+    public void endToEndRegressionTest() throws InterruptedException {
+        // Book Shelves Regression Tests
+        bookShelvesTest.verifyBookShelves();
+        bookShelvesTest.popupClose();
+        bookShelvesTest.setPriceFilter();
+        bookShelvesTest.sortByPriceHighToLow();
+        bookShelvesTest.chooseCategory();
+        bookShelvesTest.outOfStockCheckbox();
+        bookShelvesTest.getBookDetails();
+        bookShelvesTest.writeExcel();
+
+        // Dropdown Regression Test
+        // Assuming there are regression tests for dropdown functionality
+
+        // Gift Cards Regression Tests
+        giftCardsTest.invalidDetailsFilling();
+        giftCardsTest.captureAndDisplayErrorMessage();
+        giftCardsTest.validateDetails();
+        giftCardsTest.validateAllDetails();
+        giftCardsTest.writeDetailsToJson();
+    }
+
+    @AfterClass
+    public void tearDown() {
+        // Clean-up
+        quitDriver();
+    }
+}
+***********************************
+Feature: Bookshelves functionality verification
+
+  @smoke
+  Scenario: Verify Book Shelves
+    Given User is on the home page
+    When User verifies book shelves
+    Then Book shelves are displayed
+
+  @regression
+  Scenario: Close Pop-up
+    Given User is on the home page
+    When User closes the pop-up
+    Then Pop-up is closed successfully
+
+  @smoke @regression
+  Scenario: Set Price Filter
+    Given User is on the home page
+    When User sets the price filter
+    Then Price filter is applied successfully
+
+  @smoke @regression
+  Scenario: Sort by Price High to Low
+    Given User is on the home page
+    When User sorts by price high to low
+    Then Products are sorted accordingly
+
+  @smoke @regression
+  Scenario: Choose Category
+    Given User is on the home page
+    When User chooses a category
+    Then Products of selected category are displayed
+
+  @smoke @regression
+  Scenario: Check Out of Stock Checkbox
+    Given User is on the home page
+    When User checks the out of stock checkbox
+    Then Out of stock products are filtered
+
+  @smoke
+  Scenario: Get Book Details
+    Given User is on the home page
+    When User gets book details
+    Then Book details are fetched successfully
+
+  @smoke
+  Scenario: Write Excel
+    Given User is on the home page
+    When User writes data to Excel
+    Then Data is written successfully
+***********************************************************
+Feature: Gift Cards functionality verification
+
+  @smoke
+  Scenario: Verify Gift Card functionality
+    Given User is on the Gift Cards page
+    When User gets gift cards
+    Then Gift Cards are displayed
+
+  @smoke
+  Scenario: Customize Gift Card
+    Given User is on the Gift Cards page
+    When User customizes a gift card
+    Then Gift Card customization is successful
+
+  @regression
+  Scenario: Fill Invalid Details
+    Given User is on the Gift Cards page
+    When User fills invalid details
+    Then Error message is captured and displayed
+
+  @regression
+  Scenario: Validate Gift Card Details
+    Given User is on the Gift Cards page
+    When User validates gift card details
+    Then Gift Card details are valid
+
+  @regression
+  Scenario: Validate All Details in Confirm Details section
+    Given User is on the Gift Cards page
+    When User checks all details in Confirm Details section
+    Then All details are validated successfully
+
+  @regression
+  Scenario: Write Gift Card Details to JSON
+    Given User is on the Gift Cards page
+    When User writes gift card details to JSON
+    Then Gift Card details are written to JSON file
+*******************************************************************
+Feature: Dropdown functionality verification
+
+  @dropdown
+  Scenario: Retrieve Living Details
+    Given User is on the dropdown page
+    When User retrieves living details
+    Then Living details are displayed
+****************************************************************
+public static void writeLivingDetailsToExcel(List<String> livingDetails, String filePath) throws IOException {
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Living Details");
+
+        int rowNum = 0;
+        Row headerRow = sheet.createRow(rowNum++);
+        headerRow.createCell(0).setCellValue("Living Details");
+
+        for (String detail : livingDetails) {
+            Row row = sheet.createRow(rowNum++);
+            row.createCell(0).setCellValue(detail);
+        }
+
+        // Write the workbook to a file
+        FileOutputStream fileOut = new FileOutputStream(filePath);
+        workbook.write(fileOut);
+        fileOut.close();
+
+        // Close the workbook
+        workbook.close();
+*************************************************************************************************
