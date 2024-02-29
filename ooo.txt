@@ -1,0 +1,27 @@
+Search for Bookshelves:
+
+Launch the browser and navigate to "https://www.urbanladder.com/".
+Click on the "Bookshelves" option.
+Set the price filter to below Rs. 15000.
+Choose a category (e.g., Wall Shelves / Kid Bookshelves / Study Tables).
+Exclude out-of-stock items.
+Sort the results by price from high to low.
+Fetch the details of the top 3 items.
+Print all details in the console output.
+Retrieve Living Items:
+
+Scroll the page and click on the "Living" menu.
+Choose a submenu item (e.g., "Seating & Chairs" or "Living Storage").
+Retrieve all items under the selected submenu.
+Print the details of these items in the console output.
+Gift Cards Procedure:
+
+Scroll the page and click on the "Gift Cards" option.
+Select the "Birthday/Anniversary" option.
+Enter the amount as '1000' and click the "Next" button.
+Fill all mandatory fields under "Customize your gift card".
+Enter an invalid email address (without @ symbol) in the "Recipient’s Email" field.
+Click the "Submit" button.
+Capture and display the error message in the console output.
+Provide a valid email address and validate all the given details in the "Confirm Details" section.
+------------------------------------
